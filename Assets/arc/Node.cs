@@ -8,8 +8,6 @@ namespace Arc
 {
 	public sealed class Node : MonoBehaviour
 	{
-		//we use object instead of generics here to avoid having to put generic type parameters on a MonoBehaviour (-> massive class proliferation)
-		public object model;
 		public View view;// = new TestView();
 		public Ctrl ctrl;// = new TestCtrl(); //DEV, remove ctor when implementing this (abstract) class
 		
@@ -18,21 +16,13 @@ namespace Arc
 		void Awake() //DEV? just to read gameObject name
 		{
 			Debug.Log("AWAKE " +this.gameObject.name);
-			//first choice is to try to pull model as a component - otherwise it can be injected and _Initialise() called again.
-			model = GetComponent<Model>();
+			
 			ctrl = GetComponent<Ctrl>();
 			view = GetComponent<View>();
 			
-			_Initialise();
-		}
-		
-		public void _Initialise()
-		{
 			if (ctrl != null)
 			{
-				//TODO model
 				ctrl.node = this;
-				ctrl.gameObject = this.gameObject; /*gameObject.SetActive(false);*/ 
 				BondCtrl();
 				if (!ctrl.initialiseOnStart)
 					ctrl.Initialise();
@@ -41,9 +31,7 @@ namespace Arc
 			//NB views initialise themselves?
 			if (view != null)
 			{
-				//TODO model
 				view.node = this;
-				view.gameObject = this.gameObject;
 				//if (!view.initialiseOnStart)
 				//	view.Initialise();
 			}
@@ -52,8 +40,9 @@ namespace Arc
 		void Start() //acts as the view init, along with Awake()? - this would require the ctrl init to have been called first, so that model is in order.
 		{
 			Debug.Log("START "+this.gameObject.name);
-			if (ctrl.initialiseOnStart)
-				ctrl.Initialise();
+			if (ctrl != null)
+				if (ctrl.initialiseOnStart)
+					ctrl.Initialise();
 			//if (view.initialiseOnStart)
 			//	view.Initialise();
 		}
@@ -77,7 +66,6 @@ namespace Arc
 				if (node != null) //TODO we could even search up the tree, here.
 				{
 					ctrl.parent = node.ctrl;
-					Debug.Log(node.gameObject.name);
 					ctrl.parent.children.Add(ctrl);
 				}
 			}

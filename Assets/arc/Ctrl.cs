@@ -12,7 +12,6 @@ namespace Arc
 		public bool initialiseOnStart;
 		public object modelUntyped;
 		public Node node; //Node holding this.
-		public GameObject gameObject; //upon which the Node sits.
 		
 		//public abstract void Start(); //starts ctrl updating - caused by SetActive(true)
 		//public abstract void Stop(); //stops ctrl updating - contains SetActive(false)

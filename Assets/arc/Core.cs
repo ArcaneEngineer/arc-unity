@@ -12,30 +12,38 @@ namespace Arc
 	//-(TODO) creates the scene graph from config
 	public sealed class Core : MonoBehaviour
 	{
+		//there need only be one - it can kick off all the rest in a hierarchy
+		public List<GameObject> initialActivations; //in order
+		private List<Ctrl> ctrlsToRun = new List<Ctrl>(); //in order - switch to Debug mode in inspector to see this.
+		
+		
 		public void Awake()
 		{
-			//Debug.Log("AWAKE - CTRL CORE");
+			Debug.Log("AWAKE - CORE");
 			
-			//_Initialise();
-			//gameObject.SetActive(true); //even though this is already active, it recurses through the rest.
+			ActivateChildren(this.gameObject, false);
+			ActivateInitial();
 		}
 		
-		public void _Initialise()
+		public static void ActivateChildren(GameObject gameObject, bool state, bool recurse = true)
 		{
-			//Debug.Log("_Initialise");
-			
-			//node.ctrl.model = model;
-			
-			foreach (Transform childTF in gameObject.transform)
+			foreach (Transform childTransform in gameObject.transform)
 			{
-				//GameObject newChild = new GameObject("_null");
-				Node node = childTF.GetComponent<Node>();
-				(node.ctrl as Ctrl)._Initialise();
-				childTF.gameObject.SetActive(true);
-				break;
+				childTransform.gameObject.SetActive(state);
+				if (recurse)
+					ActivateChildren(childTransform.gameObject, state, recurse);
 			}
-			
-			//node.gameObject.SetActive(true);
+		}
+		
+		public void ActivateInitial()
+		{
+			foreach (GameObject go in initialActivations)
+			{
+				go.SetActive(true);
+				Ctrl ctrl = go.GetComponent<Ctrl>();
+				if (ctrl != null)
+					ctrlsToRun.Add(ctrl);
+			}
 		}
 		
 		void Update ()
@@ -47,7 +55,8 @@ namespace Arc
 				//GameObject newChild = new GameObject("_null");
 				Node node = child.GetComponent<Node>();
 				if (node.gameObject.activeSelf)
-					(node.ctrl as Ctrl)._Update();
+					if  (node.ctrl != null)
+						(node.ctrl as Ctrl)._Update();
 			}
 			if (Input.GetKeyDown("space"))
 			{

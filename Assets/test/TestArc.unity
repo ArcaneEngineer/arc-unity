@@ -99,7 +99,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 268995811}
   - 114: {fileID: 268995815}
-  - 114: {fileID: 268995814}
   - 114: {fileID: 268995813}
   - 114: {fileID: 268995812}
   m_Layer: 0
@@ -136,9 +135,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialiseOnStart: 0
   node: {fileID: 0}
-  gameObject: {fileID: 0}
   parent: {fileID: 0}
   children: []
+  a: 7
+  b: hello
 --- !u!114 &268995813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,22 +152,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialiseOnStart: 0
   node: {fileID: 0}
-  gameObject: {fileID: 0}
   parent: {fileID: 0}
   children: []
---- !u!114 &268995814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 268995810}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18ef37904f2a834a911d26edf73a539, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  a: 7
-  b: hello
 --- !u!114 &268995815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,7 +264,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 955870444}
   - 114: {fileID: 955870448}
-  - 114: {fileID: 955870447}
   - 114: {fileID: 955870446}
   - 114: {fileID: 955870445}
   m_Layer: 0
@@ -314,9 +299,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialiseOnStart: 0
   node: {fileID: 0}
-  gameObject: {fileID: 0}
   parent: {fileID: 0}
   children: []
+  a: 7
+  b: hello
 --- !u!114 &955870446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,22 +316,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialiseOnStart: 0
   node: {fileID: 0}
-  gameObject: {fileID: 0}
   parent: {fileID: 0}
   children: []
---- !u!114 &955870447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 955870443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18ef37904f2a834a911d26edf73a539, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  a: 7
-  b: hello
 --- !u!114 &955870448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,7 +341,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1086767341}
   - 114: {fileID: 1086767342}
-  - 114: {fileID: 1086767343}
   - 114: {fileID: 1086767345}
   - 114: {fileID: 1086767344}
   m_Layer: 0
@@ -406,19 +377,6 @@ MonoBehaviour:
   view: {fileID: 1086767345}
   ctrl: {fileID: 1086767344}
   initialiseOnStart: 0
---- !u!114 &1086767343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1086767340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18ef37904f2a834a911d26edf73a539, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  a: 7
-  b: hello
 --- !u!114 &1086767344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -432,9 +390,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialiseOnStart: 0
   node: {fileID: 0}
-  gameObject: {fileID: 0}
   parent: {fileID: 0}
   children: []
+  a: 7
+  b: hello
 --- !u!114 &1086767345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,7 +407,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialiseOnStart: 0
   node: {fileID: 0}
-  gameObject: {fileID: 0}
   parent: {fileID: 0}
   children: []
 --- !u!1 &1205251014
@@ -460,9 +418,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1205251015}
   - 114: {fileID: 1205251019}
-  - 114: {fileID: 1205251018}
   - 114: {fileID: 1205251017}
-  - 114: {fileID: 1205251016}
   m_Layer: 0
   m_Name: Node1
   m_TagString: Untagged
@@ -483,22 +439,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1465792201}
   m_RootOrder: 0
---- !u!114 &1205251016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1205251014}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87c1af3368fcf8649855d22140db3b80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialiseOnStart: 0
-  node: {fileID: 0}
-  gameObject: {fileID: 0}
-  parent: {fileID: 0}
-  children: []
 --- !u!114 &1205251017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -512,22 +452,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialiseOnStart: 0
   node: {fileID: 0}
-  gameObject: {fileID: 0}
   parent: {fileID: 0}
   children: []
---- !u!114 &1205251018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1205251014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18ef37904f2a834a911d26edf73a539, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  a: 7
-  b: hello
 --- !u!114 &1205251019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -540,7 +466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   view: {fileID: 1205251017}
-  ctrl: {fileID: 1205251016}
+  ctrl: {fileID: 0}
   initialiseOnStart: 0
 --- !u!1 &1465792200
 GameObject:
@@ -584,6 +510,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69db64d6d33738d418c3714695a1f98c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialActivations:
+  - {fileID: 1205251014}
+  - {fileID: 268995810}
   testPrefab: {fileID: 1086767340}
 --- !u!1 &1672767204
 GameObject:
