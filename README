@@ -17,7 +17,7 @@ Arc-Unity is intended to allow for easy division of core logic vs view logic. Th
 
 Refer to TestScene.unity supplied herewith.
 
-An empty GameObject is created and the Core.cs script added to it. We consider this the "Core" hereafter.
+An empty GameObject is created and the Core.cs script added to it. We consider this the "Core" hereafter. Core.cs also needs to be added to Project Settings -> Script Execution Order, with any negative index being fine; thus it should run before *everything* else, being framework code. This ensures Core runs Ctrl logic before all View (MonoBehaviour) Update()s, each frame.
 
 A GameObject hierarchy is set up in Unity, within the Core; it is sufficient to start off with empty GameObjects, with the Node.cs script added to each. We consider these "Nodes" hereafter.
 
