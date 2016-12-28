@@ -1,0 +1,41 @@
+Arc-Unity is intended to allow for easy division of core logic vs view logic. This allows for a far more flexible / less brittle application architecture than is typical in Unity.
+
+***Glossary***
+
+* MVC - Model-View-Controller architectural pattern (look it up on wikipedia if you don't know what it is)
+* Core logic - the logic which governs the state of (a part of) an application, were it running without any views
+* View logic - the logic which governs the state of a given view, 
+* Corestate - the state of the application, from which views read and to which user input writes. This is usually called the (data) Model in classical MVC.
+* Viewstate - the state which allows us to represent a view onscreen.
+* Ctrl - A combined Corestate-Controller (core state and associated functions that read/write that state)
+* View - A combined Viewstate-View (view state and associated functions that read/write that state)
+* Node - A structural element that may contain a single Ctrl, a single View, both, or neither.
+
+
+
+***Usage***
+
+Refer to TestScene.unity supplied herewith.
+
+An empty GameObject is created and the Core.cs script added to it. We consider this the "Core" hereafter.
+
+A GameObject hierarchy is set up in Unity, within the Core; it is sufficient to start off with empty GameObjects, with the Node.cs script added to each. We consider these "Nodes" hereafter.
+
+A Node may contain a View implementation, a Ctrl implementation, both, or neither. Typically we associate a View and Ctrl with the same node whenever there is a clear one-to-one relationship, for example, a Ctrl for a View that is an interactive UI element. When such a relationship is not evident, or a View relates to multiple Ctrls (because it needs data from several places to operate), then we tend to have the Views and Ctrls separated into distinct nodes. Lastly, when we want purely to use a Node purely as organisational element, then it may contain neither a Ctrl or a Node (though it's descendants will then contain these, instead).
+
+Much of the time, there is no clear one to one relationship between Ctrl and View. For example, the first person aspect of a game may draw from many places across multiple Ctrls; in this case there may be an associated FirstPersonView, but not necessarily one associated FirstPersonCtrl.
+
+Views may reference zero, one, or many Ctrls directly - in your View implementation / subclass, add the required Ctrls as duly typed members, and drag drop Ctrls from the same or other nodes, using the inspector, onto your View. Ensure these Ctrls have the necessary methods to support any _writes_ to the Ctrl state, performed by the View (e.g. click to delete an item from a list). They may read state with impunity.
+
+Views only in certain explicit instances, should be allowed to *write* Ctrl state; in these events, it should always be done via a method supplied for the purpose of writing said state. This ensure that it is easier to trace who is changing what, avoiding messy logic / spaghetti code. 
+
+Ctrls DO read and write Ctrl state.
+
+Ctrls DO NOT EVER reference Views directly (may perhaps ref a View method as a callback / event handler for certain View / UI  actions).
+
+SuperCtrls (those higher up in the node hierarchy) should always have functions that make changes to their own state; subCtrls, even though they may grab a reference to a superCtrl through the Node hierarchy, should never perform changes to superCtrls except by calling such methods built for this purpose. This not only prevents spaghetti code, but ensures method calls are a lot easier to trace out using Debug.Log than direct modifications of public members would be. 
+
+By default, assume the perspective that Views will only read Ctrls / core state, and never write it; in those cases where a View must write a model, proceed only with explicit and certain knowledge of such a need (certain Views, like UI elements that change the core state, will indeed need to write the model). And in these cases, use the aforementioned, explicitly-defined methods to make these Ctrl / core state changes.
+
+Any concepts that seem to "sit on the fence" between being a Ctrl and a View i.e. which may be referenced directly by both -  e.g. a mesh used both for collisions and rendering - should be implemented as a distinct helper class that DOES NOT subclass Ctrl or View, but is accesible to them either as a singleton, or if one in many - again e.g. meshes - then via a singleton manager class which is made accessible to all Views and Ctrls.
+
