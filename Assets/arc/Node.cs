@@ -25,7 +25,7 @@ namespace Arc
 				ctrl.node = this;
 				BondCtrl();
 				if (!ctrl.initialiseOnStart)
-					ctrl.Initialise();
+					ctrl.Init();
 			}
 			
 			//NB views initialise themselves?
@@ -33,7 +33,7 @@ namespace Arc
 			{
 				view.node = this;
 				//if (!view.initialiseOnStart)
-				//	view.Initialise();
+				//	view.Init();
 			}
 		}
 		
@@ -42,7 +42,7 @@ namespace Arc
 			Debug.Log("START "+this.gameObject.name);
 			if (ctrl != null)
 				if (ctrl.initialiseOnStart)
-					ctrl.Initialise();
+					ctrl.Init();
 			//if (view.initialiseOnStart)
 			//	view.Initialise();
 		}

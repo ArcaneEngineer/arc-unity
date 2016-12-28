@@ -10,16 +10,15 @@ namespace Arc
 		//bool initialised; ///< True after first initialise of the owner instance. If re- initialise is required, manually reset this to false.
 		//bool suspended; ///< An alternative to suspending the whole containing Node, we can instead set this on an individual Updater.
 		public bool initialiseOnStart;
-		public object modelUntyped;
 		public Node node; //Node holding this.
 		
 		//public abstract void Start(); //starts ctrl updating - caused by SetActive(true)
 		//public abstract void Stop(); //stops ctrl updating - contains SetActive(false)
-		public abstract void Initialise();
+		public abstract void Init();
 		//public abstract void LateInitialise();
 		//public abstract void Dispose();
-		public abstract void Update();
-		public abstract void LateUpdate(); //UpdatePost();
+		public abstract void Updt();
+		public abstract void UpdtLate(); //UpdatePost();
 		//public abstract void Suspend();
 		//public abstract void Resume();
 		//public void DoNothing();
@@ -31,7 +30,7 @@ namespace Arc
 		
 		public void _Initialise()
 		{
-			Initialise();
+			Init();
 			/*
 			foreach (View child in children) 
 			{

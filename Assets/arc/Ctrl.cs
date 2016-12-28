@@ -10,16 +10,15 @@ namespace Arc
 		//bool initialised; ///< True after first initialise of the owner instance. If re- initialise is required, manually reset this to false.
 		//bool suspended; ///< An alternative to suspending the whole containing Node, we can instead set this on an individual Updater.
 		public bool initialiseOnStart;
-		public object modelUntyped;
 		public Node node; //Node holding this.
 		
 		//public abstract void Start(); //starts ctrl updating - caused by SetActive(true)
 		//public abstract void Stop(); //stops ctrl updating - contains SetActive(false)
-		public abstract void Initialise();
-		//public abstract void LateInitialise();
+		public abstract void Init();
+		//public abstract void InitLate();
 		//public abstract void Dispose();
-		public abstract void Update_();
-		public abstract void LateUpdate_(); //UpdatePost();
+		public abstract void Updt();
+		public abstract void UpdtLate(); //UpdatePost();
 		//public abstract void Suspend();
 		//public abstract void Resume();
 		//public void DoNothing();
@@ -29,9 +28,9 @@ namespace Arc
 		public Ctrl parent = null;
 		public List<Ctrl> children = new List<Ctrl>();
 		
-		public void _Initialise()
+		public void _Init()
 		{
-			Initialise();
+			Init();
 			/*
 			foreach (Ctrl child in children) 
 			{
@@ -41,16 +40,16 @@ namespace Arc
 			//LateInit();
 		}
 		
-		public void _Update()
+		public void _Updt()
 		{
-			Update_(); //postorder DFS
+			Updt(); //postorder DFS
 			
 			foreach (Ctrl child in children) 
 			{
-				child._Update();
+				child._Updt();
 			}
 			
-			LateUpdate_(); //preorder DFS
+			UpdtLate(); //preorder DFS
 		}
 	}
 }

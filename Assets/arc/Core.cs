@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 
 //Add Arc.Core to Script Execution Order above default time (and probably before everything else, since Ctrl logic should always run before any/all render related).
-
+//This is also why this class can't be merged into Node!
 namespace Arc
 {
 	//A top level behaviour that:
@@ -29,9 +29,14 @@ namespace Arc
 		{
 			foreach (Transform childTransform in gameObject.transform)
 			{
-				childTransform.gameObject.SetActive(state);
-				if (recurse)
-					ActivateChildren(childTransform.gameObject, state, recurse);
+				Node node = childTransform.gameObject.GetComponent<Node>();
+				if (node != null)
+				{
+					childTransform.gameObject.SetActive(state);
+					//NOTE: due to the conditional above, we do not recurse through any GameObject that is a non-Node!
+					if (recurse)
+						ActivateChildren(childTransform.gameObject, state, recurse);
+				}
 			}
 		}
 		
@@ -56,7 +61,7 @@ namespace Arc
 				Node node = child.GetComponent<Node>();
 				if (node.gameObject.activeSelf)
 					if  (node.ctrl != null)
-						(node.ctrl as Ctrl)._Update();
+						(node.ctrl as Ctrl)._Updt();
 			}
 			if (Input.GetKeyDown("space"))
 			{
