@@ -11,8 +11,8 @@ namespace Arc
 		//bool suspended; ///< An alternative to suspending the whole containing Node, we can instead set this on an individual Updater.
 
 		public Node node; //Node holding this.
-		public abstract void Init(); //called by Node.Start
 		public abstract void Awak(); //called by Node.Awake - Unity only
+		public abstract void Init(); //called by Node.Start
 		public abstract void Resm(); //called by Node.OnEnable
 		public abstract void Susp(); //called by Node.OnDisable
 		public abstract void Updt(); //called by Core.Update before recursing children Ctrl.Updts
