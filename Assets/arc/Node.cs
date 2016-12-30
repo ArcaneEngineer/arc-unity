@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
 //Node serves 2 purposes:
@@ -8,14 +9,12 @@ namespace Arc
 {
 	public sealed class Node : MonoBehaviour
 	{
-		public View view;// = new TestView();
-		public Ctrl ctrl;// = new TestCtrl(); //DEV, remove ctor when implementing this (abstract) class
-		
-		public bool initialiseOnStart = false;
-		
-		void Awake() //DEV? just to read gameObject name
+		public View view;
+		public Ctrl ctrl;
+
+		void Awake() //like the Ctor - all Awakes are called before all Starts, each frame
 		{
-			Debug.Log("AWAKE " +this.gameObject.name);
+			Debug.Log("Awake " +this.gameObject.name);
 			
 			ctrl = GetComponent<Ctrl>();
 			view = GetComponent<View>();
@@ -24,32 +23,40 @@ namespace Arc
 			{
 				ctrl.node = this;
 				BondCtrl();
-				if (!ctrl.initialiseOnStart)
-					ctrl.Init();
+				ctrl.Awak();
 			}
 			
-			//NB views initialise themselves?
+			//NB views initialise themselves? - using Unity's standard framework approaches.
 			if (view != null)
 			{
 				view.node = this;
-				//if (!view.initialiseOnStart)
-				//	view.Init();
+				//set children?
 			}
 		}
 		
-		void Start() //acts as the view init, along with Awake()? - this would require the ctrl init to have been called first, so that model is in order.
+		void Start() //typically used in Unity for combining / accessing objects created through Awake()
 		{
-			Debug.Log("START "+this.gameObject.name);
+			Debug.Log("Start "+this.gameObject.name);
 			if (ctrl != null)
-				if (ctrl.initialiseOnStart)
-					ctrl.Init();
-			//if (view.initialiseOnStart)
-			//	view.Initialise();
+				ctrl.Init();
+		}
+		
+		void OnEnable()
+		{
+			Debug.Log("OnEnable "+this.gameObject.name);
+			if (ctrl != null)
+				ctrl.Resm();
+		}
+		
+		void OnDisable()
+		{
+			Debug.Log("OnDisable "+this.gameObject.name);
+			if (ctrl != null)
+				ctrl.Susp();
 		}
 		
 		void Update()
 		{
-			//view._Update();
 		}
 		
 		//"Bonding" refers to the parent-child linkage process.

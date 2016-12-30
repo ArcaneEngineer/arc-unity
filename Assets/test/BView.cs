@@ -18,6 +18,7 @@ public class BView : Arc.View
 	public override void Updt() 		{Debug.Log("view.Updt name="+ (gameObject != null ? gameObject.name : "<anon>"));}
 	//public override void InitLate(){}
 	public override void UpdtLate() 	{}
+	public override void Awak(){}
 	
 	//user-implemented: keep list of Ctrls / states we need to drive this View
 	public BCtrl bCtrl; //optional, since we can easily grab it off this View's own node (these sit together on the BNode)
